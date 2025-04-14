@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Web Application</title>
+    <style>
+        /* Overall styling */
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background: linear-gradient(180deg, #222, #555);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #111;
+            color: #FFD700; /* Gold for a sporty look */
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        /* Container for the form and results */
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        select {
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #FFD700;
+            color: #333;
+            background-color: #eee;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        input[type="submit"] {
+            background-color: #f44336; /* IPL Red */
+            color: white;
+            padding: 12px 24px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            align-self: center;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #c1352e;
+        }
+
+        .results {
+            margin-top: 30px;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .results p {
+            font-size: 18px;
+            padding: 10px;
+            background-color: #444;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 5px solid #FFD700;
+        }
+
+        .results p:nth-child(odd) {
+            background-color: #555;
+        }
+
+        .results p:nth-child(even) {
+            background-color: #666;
+        }
+
+        /* Add IPL-themed cricket icon */
+        .icon {
+            font-size: 50px;
+            color: #FFD700;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>IPL 2025 - Team Vs Team</h1>
+</header>
+
+<div class="container">
+    <form action="/teamvteam" method="get">
+        <label for="team1">Select Team 1</label>
+        <select name="team1" id="team1">
+            <option>Select Team 1</option>
+            {% for item in teams %}
+                <option>{{ item }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="team2">Select Team 2</label>
+        <select name="team2" id="team2">
+            <option>Select Team 2</option>
+            {% for item in teams %}
+                <option>{{ item }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Find Track Record">
+    </form>
+
+    {% if result %}
+        <div class="results">
+            {% for i in result %}
+                <p>{{ i }} : {{ result[i] }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- IPL themed cricket icon -->
+    <div class="icon">
+        🏏
+    </div>
+</div>
+
+</body>
+</html>
